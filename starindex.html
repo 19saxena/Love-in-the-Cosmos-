@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love in the Cosmos</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #0b3d91, #1a1a40);
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+    }
+    #canvas {
+      display: block;
+    }
+    .message{
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+    }
+    .message h1{
+      font-size: 3rem;
+      color: #ff69b4;
+    }
+    .poem {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.poem h2 {
+  font-size: 2rem;
+  left: 50%;
+  top: 20%;
+  color: gold;
+  text-align: center;
+}
+
+.poem-paragraph {
+  display: none;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  width: 100%;
+  margin: 0 0;
+}
+
+    .image-section {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      background: rgba(0, 0, 0, 0.8);
+      transform: translate(-50%, -50%);
+      text-align: center;
+      display: none;
+    }
+    .image-section img {
+      max-width: 400px;
+      margin-top: 100px;
+      margin-bottom: 100px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    .image-section p {
+      position: absolute;
+      bottom: 10px;
+      font-size: 1.2rem;
+      margin-top:1rem;
+      background: rgba(0, 0, 0, 0.8);
+    }
+    .main{
+        font-family: sans-serif;
+        font-size: 1.2rem;
+        margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <div class="main">LOVE IN THE COSMOS!</div>
+  <div class="image-section">
+    <img src="" alt="Memory">
+    <p></p>
+  </div>
+  <div class="poem" style="display: none; opacity: 0;">
+    <h2 class="h2"><centre>Our Cosmic Love</centre></h2>
+    <p class="poem-paragraph">Another year passes by,<br> Yet I don't know why<br> When I see you, I still feel<br> Like a teenage girl, bubbly and shy.</p>
+    <p class="poem-paragraph">The summers were the best,<br> Cause then we were the closest<br> And physically being near you<br> Always filled me with zest.</p>
+    <p class="poem-paragraph">Then we had to part ways<br>At the end of the holidays<br>But going back to college<br> Seemed like a cruel, sad phase.</p>
+    <p class="poem-paragraph">Somehow, the months passed<br>Each bringing us closer than the last<br>And now we're finally together again<br>And I'm sure we're gonna have a blast!</p>
+    <p class="poem-paragraph">But I can't wait for more years to pass by, <br>For us living together under this starry sky<br>For you falling asleep in my arms <br> While I sing to you a sweet lullaby.</p>
+  </div>
+  
+  <div class="message">
+    <h1>You are my universe</h1>
+    <h1>Happy 2nd Anniversary!</h1>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
