@@ -21,6 +21,7 @@ for (let i = 0; i < 200; i++) {
   });
 }
 
+
 // Draw stars function
 function drawStars() {
   ctx.fillStyle = "black";
@@ -56,7 +57,6 @@ function drawStars() {
 
 // Start the animation loop
 drawStars();
-
 // Memory data
 const memories = [
   {
@@ -79,12 +79,14 @@ const memories = [
 
 // Orbital movement logic
 function startOrbiting() {
-  gsap.to(star1, { duration: 8, x: canvas.width / 2 - 70, y: canvas.height / 2 - 50 });
+  gsap.to(star1, { duration: 5, x: canvas.width / 2 - 70, y: canvas.height / 2 - 50 });
   gsap.to(star2, {
-    duration: 8,
+    duration: 5,
     x: canvas.width / 2 + 70,
     y: canvas.height / 2 + 50,
-    onComplete: () => showImages(0),
+    onComplete: () => {
+      showImages(0),
+      console.log("hahah")}
   });
 }
 
@@ -105,7 +107,7 @@ function showImages(index) {
   text.textContent = memory.description;
 
   imageSection.style.display = "block";
-  gsap.to(imageSection, { opacity: 1, duration: 6});
+  gsap.to(imageSection, { opacity: 1, duration: 8});
   gsap.to(imageSection, {
     opacity: 0,
     duration: 1,
@@ -124,20 +126,35 @@ function showPoem() {
   let currentIndex = 0;
 
   // Ensure the poem container is visible
-  poem.style.display = "flex";
-  gsap.to(poem, { opacity: 1, duration: 15 });
+  poem.style.display ="flex";
+  poem.style.flexDirection = "column";
+  poem.style.justifyContent = "center";
+  poem.style.alignItems = "center";
+  gsap.to(poem, { opacity: 1, duration: 1 });
 
   // Function to display the next paragraph
   function showNextParagraph() {
     if (currentIndex < paragraphs.length) {
       const currentParagraph = paragraphs[currentIndex];
-      currentParagraph.style.display = "block"; // Ensure it's visible
-      gsap.to(currentParagraph, { opacity: 1, duration: 15});
 
+      // Hide all paragraphs initially
+      paragraphs.forEach((p, index) => {
+        if (index !== currentIndex) {
+          p.style.opacity = 0;
+          p.style.display = "none"; // Hide all other paragraphs
+        }
+      });
+
+      // Display the current paragraph
+      currentParagraph.style.display = "block"; // Ensure it's visible
+      gsap.to(currentParagraph, { opacity: 1, duration: 12 }); // Fade in the current paragraph
+
+      // Fade out the previous paragraph if any
       if (currentIndex > 0) {
-        document.querySelector(".h2").style.opacity="0";
         const prevParagraph = paragraphs[currentIndex - 1];
-        gsap.to(prevParagraph, { opacity: 0, duration: 3 });
+        gsap.to(prevParagraph, { opacity: 0, duration: 1, onComplete: () => {
+          prevParagraph.style.display = "none"; // Hide after fading out
+        }});
       }
       currentIndex++;
     } else {
@@ -152,7 +169,7 @@ function showPoem() {
   }
 
   showNextParagraph(); // Show the first paragraph immediately
-  const interval = setInterval(showNextParagraph, 15000); // Show the next paragraph every 3 seconds
+  const interval = setInterval(showNextParagraph, 12000); // Show the next paragraph every 3 seconds
 }
 
 // Merge stars and trigger heart explosion
@@ -245,16 +262,23 @@ function drawStar(ctx, x, y, radius, spikes, outerRadius, innerRadius, color) {
     drawStar(ctx, star1.x, star1.y, star1.radius, 5, 30, 15, "yellow");
     drawStar(ctx, star2.x, star2.y, star2.radius, 5, 30, 15, "yellow");
   
-    // Add names to the stars
+    // Add names to the stars dynamically
     ctx.fillStyle = "white";
     ctx.font = "16px Arial";
     ctx.textAlign = "center";
-    ctx.fillText("Sahaj", star1.x, star1.y + 50);
-    ctx.fillText("Ishaan", star2.x, star2.y + 50);
+  
+    if (Math.abs(star1.x - star2.x) < 5 && Math.abs(star1.y - star2.y) < 5) {
+      // If stars are merged, display "Us" at the merged position
+      ctx.fillText("Us💕", (star1.x + star2.x) / 2, (star1.y + star2.y) / 2 + 50);
+    } else {
+      // If stars haven't merged yet, display their individual names
+      ctx.fillText("Sahaj", star1.x, star1.y + 50);
+      ctx.fillText("Ishaan", star2.x, star2.y + 50);
+    }
   
     requestAnimationFrame(drawStars);
   }
-  
+
   // Light burst during collision
   function lightBurst() {
     for (let i = 0; i < 100; i++) {
